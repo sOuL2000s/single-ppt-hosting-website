@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MTech Synopsis Presentation</title>
+    <style>
+        body, html {
+            margin: 0; padding: 0; height: 100%; overflow: hidden;
+            background-color: #333; font-family: sans-serif;
+        }
+        /* Make the viewer responsive */
+        .container {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            display: flex; flex-direction: column;
+        }
+        iframe {
+            flex-grow: 1; border: none; width: 100%; height: 100%;
+        }
+        .controls {
+            background: #222; color: white; padding: 10px;
+            text-align: center; font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Microsoft Office Viewer iFrame -->
+        <iframe src="https://view.officeapps.live.com/op/view.aspx?src=YOUR_LINK_HERE" 
+                frameborder="0">
+        </iframe>
+        
+        <div class="controls">
+            MTech Synopsis: RAG Dialogue Summarization | 
+            <button onclick="document.documentElement.requestFullscreen()">View Fullscreen</button>
+        </div>
+    </div>
+
+</body>
+</html>
