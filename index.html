@@ -2,772 +2,423 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Presentation Library</title>
-    <!-- Google Fonts: Poppins for headings, Inter for body text -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0U+fajCUVgvaXjp6oBqK0v2l8yX+e/k/P4fP5E/o5c+x2/eA0Sg4l4w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Premium Presentation Library</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        /* CSS Variables for a modern, sophisticated color palette */
         :root {
-            --primary-dark: #202c44; /* Deep Slate/Navy */
-            --primary-light: #2c3e50;
-            --accent-blue: #3498db; /* Vibrant Blue */
-            --accent-green: #2ecc71; /* Vibrant Green */
-            --danger-red: #e74c3c; /* Red */
-            --background-light: #f8f9fa; /* Soft Neutral Background */
-            --card-background: #ffffff;
-            --text-dark: #343a40;
-            --text-medium: #6c757d;
-            --border-light: #e9ecef;
-            --shadow-subtle: rgba(0, 0, 0, 0.05);
-            --shadow-medium: rgba(0, 0, 0, 0.1);
-            --shadow-hover: rgba(0, 0, 0, 0.15);
-            --glass-bg: rgba(255, 255, 255, 0.1); /* Lighter glass */
-            --glass-border: rgba(255, 255, 255, 0.2);
-            --viewer-bg: rgba(0, 0, 0, 0.9); /* Darker overlay for viewer */
-            --skeleton-base: #e0e0e0;
-            --skeleton-shine: #f5f5f5;
+            /* Sophisticated Color Palette */
+            --bg-body: #0f172a;
+            --bg-card: #1e293b;
+            --primary: #6366f1; /* Indigo */
+            --primary-hover: #818cf8;
+            --accent: #10b981; /* Emerald */
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: rgba(255, 255, 255, 0.1);
+            --glass: rgba(30, 41, 59, 0.7);
+            
+            /* Shadows & Blur */
+            --shadow-sm: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.3);
+            --blur: blur(12px);
+            
+            /* Transitions */
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* General Body and HTML Reset */
-        body, html {
-            margin: 0; padding: 0; height: 100%;
-            overflow: hidden; /* Control scrolling for page-wrapper */
-            background-color: var(--background-light);
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-body);
             font-family: 'Inter', sans-serif;
-            color: var(--text-dark);
+            color: var(--text-main);
             line-height: 1.6;
-            scroll-behavior: smooth;
+            overflow-x: hidden;
+            min-height: 100vh;
         }
 
-        /* Overall Page Wrapper for Flexbox Layout */
+        h1, h2, h3 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        /* Smooth Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-body); }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+
+        /* Wrapper */
         .page-wrapper {
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            overflow-y: auto; /* Allows the main page content to scroll */
-            overflow-x: hidden; /* Prevent horizontal scroll */
         }
 
-        /* Header for the Home Page - Modernized Hero Section */
-        .header {
-            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-light) 100%);
-            color: white;
-            padding: 40px 20px;
+        /* --- Header / Hero Section --- */
+        .hero {
+            padding: 80px 20px 60px;
             text-align: center;
-            box-shadow: 0 4px 15px var(--shadow-medium);
-            position: sticky; /* Make header sticky */
-            top: 0;
-            z-index: 10;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        .header h1 {
-            margin: 0;
-            font-size: 3.5em;
-            font-weight: 700;
-            font-family: 'Poppins', sans-serif;
-            letter-spacing: -0.05em;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-        .header p {
-            font-size: 1.2em;
-            opacity: 0.9;
-            margin-top: 15px;
-            max-width: 800px;
-            line-height: 1.8;
+            background: radial-gradient(circle at top center, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
+            position: relative;
         }
 
-        /* Main Content Area for PPT Grid */
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            background: linear-gradient(to right, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 16px;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* --- Grid Container --- */
         .main-content {
-            padding: 30px 20px;
-            max-width: 1200px;
-            margin: 30px auto;
-            flex-grow: 1;
-            box-sizing: border-box;
-            width: 100%; /* Ensure it fills container for padding */
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 24px 80px;
+            width: 100%;
         }
 
-        /* PPT Grid Layout */
         .ppt-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
+            gap: 24px;
             list-style: none;
-            padding: 0;
-            margin: 0;
         }
 
-        /* Individual PPT Item Styling (Card) */
+        /* --- Card Design --- */
         .ppt-item {
-            background-color: var(--card-background);
-            border-radius: 12px;
-            box-shadow: 0 6px 20px var(--shadow-subtle);
-            overflow: hidden;
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-            cursor: pointer;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 24px;
+            transition: var(--transition);
             display: flex;
             flex-direction: column;
-            border: 1px solid var(--border-light);
             position: relative;
+            overflow: hidden;
+            cursor: pointer;
         }
+
         .ppt-item:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 25px var(--shadow-hover);
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 0 30px rgba(99, 102, 241, 0.2);
         }
 
-        .ppt-icon {
-            background-color: var(--accent-blue);
-            color: white;
-            padding: 15px;
-            font-size: 2.5em;
+        .ppt-item::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at top right, rgba(99, 102, 241, 0.1), transparent 50%);
+            pointer-events: none;
+        }
+
+        .ppt-icon-box {
+            width: 56px;
+            height: 56px;
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: 14px;
             display: flex;
-            justify-content: center;
             align-items: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 12px 12px 0 0; /* Match card radius */
+            justify-content: center;
+            margin-bottom: 20px;
+            color: var(--primary);
+            font-size: 24px;
+            transition: var(--transition);
         }
 
-        .ppt-item-content {
-            padding: 20px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
+        .ppt-item:hover .ppt-icon-box {
+            background: var(--primary);
+            color: white;
+            transform: rotate(-5deg) scale(1.1);
         }
 
         .ppt-item h2 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.5em;
-            margin-top: 0;
-            margin-bottom: 10px;
-            color: var(--primary-dark);
-            word-break: break-word;
-            line-height: 1.3;
-        }
-        .ppt-item p {
-            font-size: 0.95em;
-            color: var(--text-medium);
-            line-height: 1.6;
-            flex-grow: 1;
-            margin-bottom: 20px;
-        }
-        .ppt-item .view-button {
-            display: block; /* Make it a block button */
-            margin-top: auto;
-            padding: 12px 20px;
-            background-color: var(--accent-blue);
-            color: white;
-            text-align: center;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 1em;
-            font-weight: 500;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3); /* Button specific shadow */
-        }
-        .ppt-item .view-button:hover {
-            background-color: #2980b9; /* Darker blue */
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(52, 152, 219, 0.4);
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text-main);
+            overflow-wrap: break-word;
+            line-height: 1.4;
         }
 
-        /* Skeleton Loader Styling */
-        .skeleton-loader {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
-            width: 100%;
-            padding: 0;
-            margin: 0;
-            list-style: none;
+        .ppt-item p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 24px;
+            flex-grow: 1;
         }
-        .skeleton-item {
-            background-color: var(--card-background);
+
+        .view-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            padding: 12px 20px;
             border-radius: 12px;
-            box-shadow: 0 6px 20px var(--shadow-subtle);
-            border: 1px solid var(--border-light);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            height: 300px; /* Fixed height for skeleton */
-            animation: pulse-bg 1.5s infinite;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            border: 1px solid var(--border);
         }
+
+        .ppt-item:hover .view-btn {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        /* --- Skeleton Loader (Enhanced) --- */
+        .skeleton-item {
+            background: var(--bg-card);
+            border-radius: 20px;
+            height: 280px;
+            padding: 24px;
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
         .skeleton-item::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, var(--skeleton-shine), transparent);
-            animation: loading-shine 1.5s infinite;
-        }
-        .skeleton-item .skeleton-icon {
-            height: 90px;
-            background-color: var(--skeleton-base);
-            border-radius: 12px 12px 0 0;
-        }
-        .skeleton-item .skeleton-content {
-            padding: 20px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .skeleton-item .skeleton-line {
-            height: 1em;
-            background-color: var(--skeleton-base);
-            border-radius: 4px;
-        }
-        .skeleton-item .skeleton-line.title {
-            width: 80%;
-            height: 1.5em;
-            margin-bottom: 10px;
-        }
-        .skeleton-item .skeleton-line.description-1 { width: 95%; }
-        .skeleton-item .skeleton-line.description-2 { width: 90%; }
-        .skeleton-item .skeleton-line.button {
-            height: 40px;
-            width: 60%;
-            align-self: flex-start;
-            margin-top: auto;
+            top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+            animation: loading 1.5s infinite;
         }
 
-        @keyframes pulse-bg {
-            0% { background-color: var(--card-background); }
-            50% { background-color: var(--border-light); }
-            100% { background-color: var(--card-background); }
-        }
-        @keyframes loading-shine {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(200%); }
+        @keyframes loading {
+            0% { left: -100%; }
+            100% { left: 100%; }
         }
 
-
-        /* Viewer Section (for displaying the selected PPT) */
-        .viewer-section {
+        /* --- Viewer Section (Full Screen Experience) --- */
+        #pptViewerSection {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background-color: var(--viewer-bg); /* Darker background for viewer */
-            z-index: 1000;
+            background: var(--bg-body);
+            z-index: 9999;
             flex-direction: column;
-            backdrop-filter: blur(5px); /* Subtle blur for overall viewer */
+            animation: fadeIn 0.3s ease;
         }
 
-        /* Viewer Header (contains back button, title, fullscreen button) */
-        .viewer-header {
-            background-color: var(--glass-bg); /* Glassmorphism background */
-            backdrop-filter: blur(15px); /* Stronger blur for header */
-            border-bottom: 1px solid var(--glass-border);
-            color: white;
-            padding: 10px 20px;
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .viewer-nav {
+            padding: 12px 20px;
+            background: var(--glass);
+            backdrop-filter: var(--blur);
+            border-bottom: 1px solid var(--border);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-            z-index: 1;
-            flex-shrink: 0;
+            gap: 15px;
         }
-        .viewer-header h2 {
-            margin: 0;
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.4em;
-            font-weight: 600;
-            flex-grow: 1;
-            text-align: center;
+
+        .viewer-nav h2 {
+            font-size: 1rem;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            padding: 0 15px;
+            max-width: 50%;
         }
-        .viewer-header button {
-            background-color: transparent; /* Transparent buttons */
+
+        .nav-btn {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border);
             color: white;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 8px 15px;
-            border-radius: 8px;
+            padding: 8px 16px;
+            border-radius: 10px;
             cursor: pointer;
-            font-size: 1em;
-            font-weight: 500;
-            transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
-            margin-right: 10px;
-            flex-shrink: 0;
+            font-size: 0.85rem;
+            font-weight: 600;
             display: flex;
             align-items: center;
             gap: 8px;
-        }
-        .viewer-header button:last-child {
-            margin-right: 0;
-        }
-        .viewer-header button i {
-            font-size: 1.1em;
-        }
-        .viewer-header button:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 255, 255, 0.5);
-            transform: translateY(-2px);
-        }
-        .viewer-header .back-button {
-            background-color: var(--danger-red); /* Stronger indicator for back button */
-            border-color: var(--danger-red);
-            padding: 8px 20px; /* Slightly wider */
-        }
-        .viewer-header .back-button:hover {
-            background-color: #c0392b; /* Darker red on hover */
-            border-color: #c0392b;
-        }
-        .viewer-header .fullscreen-button {
-            background-color: var(--accent-green); /* Stronger indicator for fullscreen */
-            border-color: var(--accent-green);
-        }
-        .viewer-header .fullscreen-button:hover {
-            background-color: #27ae60;
-            border-color: #27ae60;
+            transition: var(--transition);
         }
 
+        .nav-btn:hover { background: rgba(255,255,255,0.15); }
+        .nav-btn.back { color: #fca5a5; border-color: rgba(239, 68, 68, 0.2); }
+        .nav-btn.full { color: #6ee7b7; border-color: rgba(16, 185, 129, 0.2); }
 
-        /* Viewer iFrame */
-        .viewer-iframe {
+        .viewer-frame-container {
             flex-grow: 1;
-            border: none;
+            background: #000;
+            position: relative;
+        }
+
+        .viewer-iframe {
             width: 100%;
             height: 100%;
-            display: block;
-            background-color: white; /* Ensure iframe background is white for presentation content */
+            border: none;
         }
 
-        /* Responsive adjustments for smaller screens */
-        @media (max-width: 992px) {
-            .header h1 {
-                font-size: 3em;
-            }
-            .header p {
-                font-size: 1.1em;
-            }
-            .main-content {
-                padding: 25px 15px;
-                margin: 25px auto;
-            }
-            .ppt-grid, .skeleton-loader {
-                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-                gap: 25px;
-            }
-            .ppt-item h2 {
-                font-size: 1.3em;
-            }
-            .ppt-item p {
-                font-size: 0.9em;
-            }
-            .viewer-header h2 {
-                font-size: 1.2em;
-            }
-            .viewer-header button {
-                padding: 7px 12px;
-                font-size: 0.9em;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .header {
-                padding: 30px 15px;
-            }
-            .header h1 {
-                font-size: 2.5em;
-            }
-            .header p {
-                font-size: 1em;
-            }
-            .main-content {
-                padding: 20px 10px;
-                margin: 20px auto;
-            }
-            .ppt-grid, .skeleton-loader {
-                grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-                gap: 20px;
-            }
-            .ppt-item h2 {
-                font-size: 1.2em;
-            }
-            .ppt-item p {
-                font-size: 0.85em;
-            }
-            .ppt-icon {
-                font-size: 2em;
-                padding: 12px;
-            }
-            .ppt-item-content {
-                padding: 15px;
-            }
-            .ppt-item .view-button {
-                padding: 10px 15px;
-                font-size: 0.9em;
-            }
-            .viewer-header {
-                padding: 8px 10px;
-            }
-            .viewer-header h2 {
-                font-size: 1.1em;
-            }
-            .viewer-header button {
-                padding: 6px 10px;
-                font-size: 0.8em;
-                gap: 5px;
-            }
-            .viewer-header button i {
-                font-size: 1em;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .header {
-                padding: 25px 10px;
-            }
-            .header h1 {
-                font-size: 2em;
-            }
-            .header p {
-                font-size: 0.9em;
-            }
-            .main-content {
-                padding: 15px;
-                margin: 15px auto;
-            }
-            .ppt-grid, .skeleton-loader {
-                grid-template-columns: 1fr; /* Single column on very small screens */
-                gap: 15px;
-            }
-            .skeleton-item {
-                height: 250px;
-            }
-            .ppt-item h2 {
-                font-size: 1.1em;
-            }
-            .ppt-item p {
-                font-size: 0.8em;
-            }
-            .ppt-icon {
-                font-size: 1.8em;
-                padding: 10px;
-            }
-            .ppt-item-content {
-                padding: 12px;
-            }
-            .ppt-item .view-button {
-                padding: 8px 12px;
-                font-size: 0.85em;
-            }
-            .viewer-header {
-                padding: 6px 8px;
-            }
-            .viewer-header h2 {
-                font-size: 0.95em;
-            }
-            .viewer-header button {
-                padding: 5px 8px;
-                font-size: 0.75em;
-                gap: 4px;
-            }
+        /* Responsive Adjustments */
+        @media (max-width: 640px) {
+            .hero { padding: 60px 20px 40px; }
+            .ppt-grid { grid-template-columns: 1fr; }
+            .viewer-nav h2 { display: none; } /* Hide title on small mobile to save space */
+            .main-content { padding: 0 16px 60px; }
         }
     </style>
 </head>
 <body>
-    <div class="page-wrapper">
-        <header class="header" id="homePageHeader">
-            <h1>Our Presentation Library</h1>
-            <p>Explore a collection of insightful presentations. Click any card to dive in!</p>
+
+    <div class="page-wrapper" id="homePage">
+        <header class="hero">
+            <h1>LibreSlides</h1>
+            <p>Access our curated collection of high-impact presentations. Seamless, fast, and fully responsive.</p>
         </header>
 
-        <main class="main-content" id="pptListContainer">
-            <!-- Skeleton Loader will be displayed while fetching data -->
-            <div class="skeleton-loader" id="skeletonLoader">
-                <div class="skeleton-item">
-                    <div class="skeleton-icon"></div>
-                    <div class="skeleton-content">
-                        <div class="skeleton-line title"></div>
-                        <div class="skeleton-line description-1"></div>
-                        <div class="skeleton-line description-2"></div>
-                        <div class="skeleton-line button"></div>
-                    </div>
-                </div>
-                <div class="skeleton-item">
-                    <div class="skeleton-icon"></div>
-                    <div class="skeleton-content">
-                        <div class="skeleton-line title"></div>
-                        <div class="skeleton-line description-1"></div>
-                        <div class="skeleton-line description-2"></div>
-                        <div class="skeleton-line button"></div>
-                    </div>
-                </div>
-                <div class="skeleton-item">
-                    <div class="skeleton-icon"></div>
-                    <div class="skeleton-content">
-                        <div class="skeleton-line title"></div>
-                        <div class="skeleton-line description-1"></div>
-                        <div class="skeleton-line description-2"></div>
-                        <div class="skeleton-line button"></div>
-                    </div>
-                </div>
-                 <div class="skeleton-item">
-                    <div class="skeleton-icon"></div>
-                    <div class="skeleton-content">
-                        <div class="skeleton-line title"></div>
-                        <div class="skeleton-line description-1"></div>
-                        <div class="skeleton-line description-2"></div>
-                        <div class="skeleton-line button"></div>
-                    </div>
-                </div>
+        <main class="main-content">
+            <!-- Loading State -->
+            <div id="skeletonLoader" class="ppt-grid">
+                <div class="skeleton-item"></div>
+                <div class="skeleton-item"></div>
+                <div class="skeleton-item"></div>
             </div>
 
-            <ul class="ppt-grid" id="pptGridList" style="display: none;">
-                <!-- PPT items will be injected here by JavaScript -->
-            </ul>
+            <!-- Content -->
+            <ul class="ppt-grid" id="pptGridList" style="display: none;"></ul>
         </main>
+    </div>
 
-        <div class="viewer-section" id="pptViewerSection">
-            <div class="viewer-header">
-                <button class="back-button" onclick="hideViewer()"><i class="fas fa-arrow-left"></i> Back to List</button>
-                <h2 id="viewerTitle"></h2>
-                <button class="fullscreen-button" onclick="document.getElementById('viewerIframe').requestFullscreen()"><i class="fas fa-expand"></i> Fullscreen</button>
-            </div>
-            <iframe id="viewerIframe" class="viewer-iframe" frameborder="0" allowfullscreen></iframe>
+    <!-- PPT Viewer -->
+    <div id="pptViewerSection">
+        <div class="viewer-nav">
+            <button class="nav-btn back" onclick="hideViewer()">
+                <i class="fas fa-chevron-left"></i> <span>Back</span>
+            </button>
+            <h2 id="viewerTitle">Presentation</h2>
+            <button class="nav-btn full" onclick="toggleFullscreen()">
+                <i class="fas fa-expand"></i> <span>Expand</span>
+            </button>
+        </div>
+        <div class="viewer-frame-container">
+            <iframe id="viewerIframe" class="viewer-iframe" allowfullscreen></iframe>
         </div>
     </div>
 
     <script>
-        // Global ppts variable, will be populated dynamically from GitHub
-        let ppts = [];
-
-        // GitHub Repository Details
         const GITHUB_REPO_OWNER = 'sOuL2000s';
         const GITHUB_REPO_NAME = 'single-ppt-hosting-website';
-        const GITHUB_BRANCH = 'main'; // Or 'master' depending on your repository's default branch
-
-        // Base URL for GitHub API to fetch repository contents
+        const GITHUB_BRANCH = 'main';
         const GITHUB_API_URL = `https://api.github.com/repos/${GITHUB_REPO_OWNER}/${GITHUB_REPO_NAME}/contents?ref=${GITHUB_BRANCH}`;
-        // Base URL for Microsoft Office Online Viewer
         const OFFICE_VIEWER_BASE_URL = 'https://view.officeapps.live.com/op/view.aspx?src=';
 
-        // Get references to key DOM elements
         const pptGridList = document.getElementById('pptGridList');
         const skeletonLoader = document.getElementById('skeletonLoader');
         const pptViewerSection = document.getElementById('pptViewerSection');
         const viewerIframe = document.getElementById('viewerIframe');
         const viewerTitleElement = document.getElementById('viewerTitle');
-        const homePageHeader = document.getElementById('homePageHeader');
-        const pptListContainer = document.getElementById('pptListContainer'); // This wraps the skeleton and grid
 
-        /**
-         * Shows the skeleton loader.
-         */
-        function showSkeletonLoader() {
-            pptGridList.style.display = 'none';
-            skeletonLoader.style.display = 'grid'; // Use grid for skeleton layout
-        }
-
-        /**
-         * Hides the skeleton loader.
-         */
-        function hideSkeletonLoader() {
-            skeletonLoader.style.display = 'none';
-            pptGridList.style.display = 'grid'; // Use grid for actual content
-        }
-
-        /**
-         * Fetches all .pptx files from the specified GitHub repository.
-         * @returns {Promise<Array>} A promise that resolves to an array of PPT objects.
-         */
         async function fetchPptFiles() {
-            showSkeletonLoader(); // Show loader before fetching
             try {
                 const response = await fetch(GITHUB_API_URL);
-                if (!response.ok) {
-                    throw new Error(`GitHub API error: ${response.status} ${response.statusText}`);
-                }
+                if (!response.ok) throw new Error('API limit reached or repo not found');
                 const contents = await response.json();
 
-                const fetchedPpts = contents
+                const ppts = contents
                     .filter(item => item.type === 'file' && item.name.toLowerCase().endsWith('.pptx'))
                     .map(item => {
-                        // Format the filename into a more readable title
-                        const title = item.name
-                                        .replace(/\.pptx$/i, '') // Remove .pptx extension
-                                        .replace(/[_-]/g, ' ')   // Replace underscores/hyphens with spaces
-                                        .split(' ')              // Split into words
-                                        .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize each word
-                                        .join(' ');              // Join back with spaces
-
-                        // Construct the URL for the Office Online Viewer
-                        const viewerUrl = `${OFFICE_VIEWER_BASE_URL}${encodeURIComponent(item.download_url)}`;
+                        const cleanTitle = item.name
+                            .replace(/\.pptx$/i, '')
+                            .replace(/[_-]/g, ' ');
                         
                         return {
-                            title: title,
-                            description: `A presentation titled "${title}".`, // Generic description
-                            url: viewerUrl
+                            title: cleanTitle,
+                            url: `${OFFICE_VIEWER_BASE_URL}${encodeURIComponent(item.download_url)}`
                         };
                     });
-                return fetchedPpts;
-
+                
+                renderList(ppts);
             } catch (error) {
-                console.error("Failed to fetch PPT files from GitHub:", error);
-                pptGridList.innerHTML = `<li class="ppt-item" style="grid-column: 1 / -1; text-align: center; padding: 20px; box-shadow: none; border: none; background: none;">
-                                                <div class="ppt-item-content">
-                                                    <h2><i class="fas fa-exclamation-triangle" style="color: var(--danger-red); margin-right: 10px;"></i>Error loading presentations</h2>
-                                                    <p>Could not load presentations from GitHub. Please try again later or check your internet connection.</p>
-                                                    <small style="color: var(--text-medium);"><em>(GitHub API has rate limits for unauthenticated requests, please wait and refresh if you encounter issues)</em></small>
-                                                </div>
-                                            </li>`;
-                return [];
-            } finally {
-                hideSkeletonLoader(); // Hide loader after fetching, regardless of success or failure
+                console.error(error);
+                pptGridList.innerHTML = `<p style="text-align:center; grid-column: 1/-1; color: #f87171;">Error loading presentations. Please refresh or try again later.</p>`;
+                hideSkeleton();
             }
         }
 
-        /**
-         * Renders the list of PPTs on the home page.
-         * @param {Array} pptsData - The array of PPT objects to render.
-         */
-        function renderPptList(pptsData) {
-            pptGridList.innerHTML = ''; // Clear existing list to prevent duplicates
-            if (pptsData.length === 0 && !pptGridList.querySelector('.ppt-item h2')) {
-                // Only show "No presentations found" if no error message is already present
-                pptGridList.innerHTML = `<li class="ppt-item" style="grid-column: 1 / -1; text-align: center; padding: 20px; box-shadow: none; border: none; background: none;">
-                                                <div class="ppt-item-content">
-                                                    <h2><i class="fas fa-info-circle" style="color: var(--accent-blue); margin-right: 10px;"></i>No presentations found</h2>
-                                                    <p>No PowerPoint files (.pptx) were found in the '${GITHUB_REPO_NAME}' repository on the '${GITHUB_BRANCH}' branch.</p>
-                                                    <small style="color: var(--text-medium);">Ensure your .pptx files are directly in the root of the specified branch.</small>
-                                                </div>
-                                            </li>`;
+        function renderList(ppts) {
+            hideSkeleton();
+            if (ppts.length === 0) {
+                pptGridList.innerHTML = `<p style="text-align:center; grid-column: 1/-1;">No presentations found in the repository.</p>`;
                 return;
             }
-            pptsData.forEach(ppt => {
-                const li = document.createElement('li');
-                li.className = 'ppt-item';
-                // Store URL and Title directly on the element for quick access
-                li.setAttribute('data-url', ppt.url);
-                li.setAttribute('data-title', ppt.title);
 
-                li.innerHTML = `
-                    <div class="ppt-icon">
-                        <i class="fas fa-file-powerpoint"></i>
+            pptGridList.innerHTML = ppts.map(ppt => `
+                <li class="ppt-item" onclick="showViewer('${ppt.url.replace(/'/g, "\\'")}', '${ppt.title.replace(/'/g, "\\'")}')">
+                    <div class="ppt-icon-box">
+                        <i class="fas fa-display"></i>
                     </div>
-                    <div class="ppt-item-content">
-                        <h2>${ppt.title}</h2>
-                        <p>${ppt.description}</p>
-                        <a href="#" class="view-button" onclick="event.preventDefault(); showViewer('${ppt.url.replace(/'/g, "\\'")}', '${ppt.title.replace(/'/g, "\\'")}')">View Presentation <i class="fas fa-external-link-alt" style="margin-left: 8px;"></i></a>
+                    <h2>${ppt.title}</h2>
+                    <p>Professional PowerPoint presentation. Click to view in full resolution.</p>
+                    <div class="view-btn">
+                        Open Presentation <i class="fas fa-arrow-right"></i>
                     </div>
-                `;
-                // Add click listener to the entire card for better UX
-                li.addEventListener('click', (e) => {
-                    // Prevent click from bubbling up if target is the button itself,
-                    // as the button already has its own handler or any interactive element inside
-                    if (!e.target.closest('.view-button')) { // Check if the clicked element or its parent is the button
-                        const url = li.getAttribute('data-url');
-                        const title = li.getAttribute('data-title');
-                        showViewer(url, title);
-                    }
-                });
-                pptGridList.appendChild(li);
-            });
+                </li>
+            `).join('');
         }
 
-        /**
-         * Displays the PPT viewer with the specified presentation.
-         * @param {string} url - The URL of the PPT to display.
-         * @param {string} title - The title of the PPT.
-         */
+        function hideSkeleton() {
+            skeletonLoader.style.display = 'none';
+            pptGridList.style.display = 'grid';
+        }
+
         function showViewer(url, title) {
             viewerIframe.src = url;
             viewerTitleElement.textContent = title;
-
-            // Hide the home page elements
-            homePageHeader.style.display = 'none';
-            pptListContainer.style.display = 'none';
-
-            // Show the viewer section
-            pptViewerSection.style.display = 'flex'; // Use flex to activate viewer's internal flex layout
-            document.body.style.overflow = 'hidden'; // Prevent body scroll when viewer is open
-
-            // Update browser history for back/forward navigation
-            history.pushState({ viewerOpen: true, url: url, title: title }, title, `#view-${encodeURIComponent(title.replace(/\s/g, '-'))}`);
+            pptViewerSection.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            history.pushState({viewing: true}, title, `#${encodeURIComponent(title)}`);
         }
 
-        /**
-         * Hides the PPT viewer and returns to the home page list.
-         */
         function hideViewer() {
-            // Hide the viewer section
             pptViewerSection.style.display = 'none';
-
-            // Show the home page elements
-            homePageHeader.style.display = 'flex'; // Header is flex
-            pptListContainer.style.display = 'block'; // Container is block
-
-            // Re-enable body scrolling
-            document.body.style.overflow = 'auto'; // Allow body scroll again
-
-            // Clear iframe src to stop any loaded presentation and free resources
             viewerIframe.src = '';
-            viewerTitleElement.textContent = ''; // Clear title
-
-            // If the viewer was opened via pushState and we are explicitly hiding it, clear the hash
-            if (window.location.hash.startsWith('#view-')) {
-                history.replaceState({}, document.title, window.location.pathname + window.location.search);
-            }
+            document.body.style.overflow = 'auto';
+            if(window.location.hash) history.replaceState(null, '', window.location.pathname);
         }
 
-        /**
-         * Handles browser back/forward button events.
-         * Navigates between the PPT list and the viewer based on history state.
-         */
-        window.addEventListener('popstate', (event) => {
-            if (event.state && event.state.viewerOpen) {
-                // If the state indicates a viewer was open, reopen it with the saved data
-                showViewer(event.state.url, event.state.title);
-            } else {
-                // Otherwise, ensure the home page is visible and viewer is hidden
+        function toggleFullscreen() {
+            const container = document.getElementById('viewerIframe');
+            if (container.requestFullscreen) container.requestFullscreen();
+            else if (container.webkitRequestFullscreen) container.webkitRequestFullscreen();
+            else if (container.msRequestFullscreen) container.msRequestFullscreen();
+        }
+
+        // Handle Browser Back Button
+        window.onpopstate = (event) => {
+            if (pptViewerSection.style.display === 'flex') {
                 hideViewer();
             }
-        });
+        };
 
-        /**
-         * Checks if the URL hash contains a specific PPT to load on initial page load.
-         * @param {Array} pptsData - The array of PPT objects to search within.
-         */
-        function checkInitialHash(pptsData) {
-            const hash = window.location.hash;
-            if (hash.startsWith('#view-')) {
-                const titlePart = decodeURIComponent(hash.substring(6)).replace(/-/g, ' ');
-                const foundPpt = pptsData.find(ppt => ppt.title.toLowerCase().includes(titlePart.toLowerCase()));
-                if (foundPpt) {
-                    showViewer(foundPpt.url, foundPpt.title);
-                } else {
-                    // If hash exists but PPT not found, or hash is invalid, go to home page
-                    history.replaceState({}, document.title, window.location.pathname + window.location.search);
-                    hideViewer();
-                }
-            } else {
-                // No specific PPT requested in hash, ensure home page is shown
-                hideViewer(); // Calls hideViewer to ensure homepage is shown and viewer is hidden
-            }
-        }
-
-        /**
-         * Initializes the application: fetches PPTs, renders the list, and checks for initial hash.
-         */
-        async function initialize() {
-            ppts = await fetchPptFiles(); // Populate the global ppts variable
-            renderPptList(ppts);        // Render the list
-            checkInitialHash(ppts);     // Check hash for initial view
-        }
-
-        // --- Initialize the website ---
-        initialize();
+        // Init
+        fetchPptFiles();
     </script>
 </body>
 </html>
